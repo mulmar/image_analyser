@@ -1,0 +1,26 @@
+.bounding-box {
+
+    position: absolute;
+    box-shadow: 0 0 0 3px #149df2 inset;
+    flex-wrap: wrap;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+}
+
+
+  .rights {
+    font-size: 18px;
+    color: lightskyblue;
+    font-weight: bold;
+    width: 25%;
+    float: right;
+    background-color: purple;
+    border: blueviolet;
+    border-width: 3px;
+    border-radius: 10px;
+    text-align: left;
+    padding-left: 5em;
+    padding-top: 2em;
+    padding-bottom: 2em;
+  }
