@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Clarifai from 'clarifai';
+//import Clarifai from 'clarifai';
 import Particles from 'react-particles-js';
 import Navigation from './components/navigation/Navigation';
 import FaceRecognition from './components/facerecognition/FaceRecognition';
@@ -10,12 +10,9 @@ import Signin from './components/signin/Signin';
 import Register from './components/register/Register';
 import './App.css';
 
-
-const app = new Clarifai.App({
- apiKey: process.env.REACT_APP_API_KEY
-});
-
-
+//const app = new Clarifai.App({
+// apiKey: process.env.REACT_APP_API_KEY
+//});
 
 const particlesOptions = {
 	particles: {
@@ -102,7 +99,15 @@ class App extends Component {
   	this.setState({imageUrl: this.state.input})
     if (this.state.model === 'GENERAL_MODEL'){
       this.setState({box: {}});
-      app.models.predict(Clarifai.GENERAL_MODEL,this.state.input)
+//      app.models.predict(Clarifai.GENERAL_MODEL,this.state.input)
+      fetch('http://localhost:3000/imageurl', {
+        method: 'post',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+          input: this.state.input
+        })
+      })
+      .then(response => response.json())  
       .then(response => {
         if (response) { this.updateEntries() }
         this.imageDescriptions(response)
@@ -112,7 +117,15 @@ class App extends Component {
     }
     if (this.state.model === 'FACE_DETECT_MODEL'){
       document.getElementById("descriptions").innerHTML ="";
-      app.models.predict(Clarifai.FACE_DETECT_MODEL,this.state.input)
+  //    app.models.predict(Clarifai.FACE_DETECT_MODEL,this.state.input)
+        fetch('http://localhost:3000/imageurlface', {
+        method: 'post',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+          input: this.state.input
+        })
+      })
+      .then(response => response.json())
       .then(response => {
         if (response) { this.updateEntries() }
         this.displayFaceBox(this.calculateFaceLocation(response))
