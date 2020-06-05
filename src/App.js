@@ -6,7 +6,7 @@ import FaceRecognition from './components/facerecognition/FaceRecognition';
 import Logo from './components/logo/Logo';
 import Rank from './components/rank/Rank';
 import ImageLinkForm from './components/imagelinkform/ImageLinkForm';
-import LoginForm from './components/loginform/LoginForm';
+import Signin from './components/signin/Signin';
 import Register from './components/register/Register';
 import './App.css';
 
@@ -28,24 +28,27 @@ const particlesOptions = {
     	}
 	}
 }
+
+const initialState = {
+  input: '',
+  imageUrl:'',
+  model: 'GENERAL_MODEL',
+  box: {},
+  route: 'signin',
+  isSignedIn : false,
+  user : {
+    id: '',
+    name: '',
+    email: '',
+    entries: 0,
+    joined: ''
+  }
+}
+
 class App extends Component {
 	constructor(){
 		super();
-		this.state ={
-			input: '',
-			imageUrl:'',
-      model: 'GENERAL_MODEL',
-      box: {},
-      route: 'signin',
-      isSignedIn : false,
-      user : {
-        id: '',
-			  name: '',
-			  email: '',
-			  entries: 0,
-			  joined: ''
-      }
-		}
+		this.state = initialState;
 	}
 
   updateEntries = () => {
@@ -119,7 +122,7 @@ class App extends Component {
 
   onRouteChange = (route) => {
     if (route === 'signout') {
-      this.setState({isSignedIn: false});
+      this.setState(initialState);
     }
     else if (route === 'home'){
       this.setState({isSignedIn: true});
@@ -153,7 +156,7 @@ class App extends Component {
          :(
            this.state.route === 'register'
            ?<Register onRouteChange={this.onRouteChange} loadUser={this.loadUser}/>
-           :<LoginForm onRouteChange={this.onRouteChange} loadUser={this.loadUser}/>
+           :<Signin onRouteChange={this.onRouteChange} loadUser={this.loadUser}/>
          )
          }
         </div>

@@ -1,7 +1,6 @@
 import React from 'react';
-import './LoginForm.css';
 
-class LoginForm extends React.Component {
+class Signin extends React.Component {
   constructor(props){
   super(props);
   this.state ={
@@ -85,4 +84,4 @@ render() {
 }
 }
 
-export default LoginForm;
+export default Signin;
