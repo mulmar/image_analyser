@@ -43,7 +43,7 @@ class App extends Component {
 	}
 
   updateEntries = () => {
-    fetch('https://protected-earth-61874.herokuapp.com/image', {
+    fetch('https://mighty-wave-62291.herokuapp.com/image', {
       method: 'put',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
@@ -92,7 +92,7 @@ class App extends Component {
   getPictureResults = (input) => {
      this.setState({box: {}});
      document.getElementById("descriptions").innerHTML ="";
-     fetch('https://protected-earth-61874.herokuapp.com/imageurl', {
+     fetch('https://mighty-wave-62291.herokuapp.com/imageurl', {
         method: 'post',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({
