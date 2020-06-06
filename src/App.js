@@ -95,43 +95,33 @@ class App extends Component {
       this.setState({model: event.target.value})
   }
 
+  getPictureResults = (input) => {
+     this.setState({box: {}});
+     document.getElementById("descriptions").innerHTML ="";
+     fetch('http://localhost:3000/imageurl', {
+        method: 'post',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+          input: this.state.input,
+          model: input
+        })
+     })
+     .then(response => response.json())  
+     .then(response => {
+        if (response) { this.updateEntries() }
+        if (input === 'GENERAL_MODEL'){
+          this.imageDescriptions(response)
+        }
+        if (input === 'FACE_DETECT_MODEL') {
+           this.displayFaceBox(this.calculateFaceLocation(response))
+        }
+     })
+     .catch(err => console.log(err));
+  }
+
   onButtonSubmit = (event) =>{
   	this.setState({imageUrl: this.state.input})
-    if (this.state.model === 'GENERAL_MODEL'){
-      this.setState({box: {}});
-//      app.models.predict(Clarifai.GENERAL_MODEL,this.state.input)
-      fetch('http://localhost:3000/imageurl', {
-        method: 'post',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({
-          input: this.state.input
-        })
-      })
-      .then(response => response.json())  
-      .then(response => {
-        if (response) { this.updateEntries() }
-        this.imageDescriptions(response)
-      })
-      .catch(err => console.log(err));
-
-    }
-    if (this.state.model === 'FACE_DETECT_MODEL'){
-      document.getElementById("descriptions").innerHTML ="";
-  //    app.models.predict(Clarifai.FACE_DETECT_MODEL,this.state.input)
-        fetch('http://localhost:3000/imageurlface', {
-        method: 'post',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({
-          input: this.state.input
-        })
-      })
-      .then(response => response.json())
-      .then(response => {
-        if (response) { this.updateEntries() }
-        this.displayFaceBox(this.calculateFaceLocation(response))
-      })
-      .catch(err => console.log(err));
-    }
+    this.getPictureResults(this.state.model);
   }
 
   onRouteChange = (route) => {
