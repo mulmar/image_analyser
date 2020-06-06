@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-//import Clarifai from 'clarifai';
 import Particles from 'react-particles-js';
 import Navigation from './components/navigation/Navigation';
 import FaceRecognition from './components/facerecognition/FaceRecognition';
@@ -9,10 +8,6 @@ import ImageLinkForm from './components/imagelinkform/ImageLinkForm';
 import Signin from './components/signin/Signin';
 import Register from './components/register/Register';
 import './App.css';
-
-//const app = new Clarifai.App({
-// apiKey: process.env.REACT_APP_API_KEY
-//});
 
 const particlesOptions = {
 	particles: {
@@ -41,7 +36,6 @@ const initialState = {
     joined: ''
   }
 }
-
 class App extends Component {
 	constructor(){
 		super();
