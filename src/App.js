@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+//import Clarifai from 'clarifai';
 import Particles from 'react-particles-js';
 import Navigation from './components/navigation/Navigation';
 import FaceRecognition from './components/facerecognition/FaceRecognition';
@@ -8,6 +9,10 @@ import ImageLinkForm from './components/imagelinkform/ImageLinkForm';
 import Signin from './components/signin/Signin';
 import Register from './components/register/Register';
 import './App.css';
+
+//const app = new Clarifai.App({
+// apiKey: process.env.REACT_APP_API_KEY
+//});
 
 const particlesOptions = {
 	particles: {
@@ -36,6 +41,7 @@ const initialState = {
     joined: ''
   }
 }
+
 class App extends Component {
 	constructor(){
 		super();
@@ -43,7 +49,7 @@ class App extends Component {
 	}
 
   updateEntries = () => {
-    fetch('http://localhost:3000/image', {
+    fetch('https://mighty-wave-62291.herokuapp.com/image', {
       method: 'put',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
@@ -92,7 +98,7 @@ class App extends Component {
   getPictureResults = (input) => {
      this.setState({box: {}});
      document.getElementById("descriptions").innerHTML ="";
-     fetch('http://localhost:3000/imageurl', {
+     fetch('https://mighty-wave-62291.herokuapp.com/imageurl', {
         method: 'post',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({
